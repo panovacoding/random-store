@@ -1,0 +1,38 @@
+:root {
+  --color-primary: rgb(92, 92, 255);
+  --color-primary-opacity-50: rgb(92, 92, 255, 0.5);
+
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  width: 1440px;
+  max-width: 100%;
+  margin: 0 auto;
+
+  padding: 0 clamp(20px, 5vw, 60px);
+}
+
+@media (max-width: 991px) {
+  
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none;
+  }
+}

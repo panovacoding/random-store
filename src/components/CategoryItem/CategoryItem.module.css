@@ -1,0 +1,10 @@
+.categoryItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.categoryItem__image {
+  width: 45px;
+  height: 45px;
+}

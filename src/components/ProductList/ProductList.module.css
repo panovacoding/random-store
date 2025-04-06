@@ -1,0 +1,13 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+
+  gap: 16px;
+}
+
+@media (max-width: 620px) {
+  .grid {
+    display: flex;
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,13 @@
+.characteristicItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-primary-opacity-50);
+}
+
+.characteristicItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}

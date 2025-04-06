@@ -1,0 +1,26 @@
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 16px 0;
+}
+
+.pagination__button {
+  width: 50px;
+  aspect-ratio: 1 / 1;
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  background: none;
+  border: 1px solid transparent;
+  transition: all 0.3s;
+}
+.pagination__button_current,
+.pagination__button:hover {
+  border-color: var(--color-primary-opacity-50);
+  color: var(--color-primary);
+}

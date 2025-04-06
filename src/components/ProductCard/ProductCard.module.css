@@ -1,0 +1,47 @@
+.productCard {
+  border: 1px solid #333333;
+  border-radius: 8px;
+  padding: 12px 16px;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  position: relative;
+}
+
+.productCardInfo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px; 
+
+  font-family: inherit;
+  font-weight: 700;
+  margin-top: 12px;
+}
+
+.productCardImage {
+  width: 100%;
+  object-fit: cover;
+}
+
+.productCardDescription {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.1;
+}
+
+.productCardFavBtn {
+  position: absolute;
+  top: 3%;
+  right: 3%;
+}
+
+.productCardLink {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}

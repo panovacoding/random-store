@@ -1,0 +1,31 @@
+.review {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--color-primary-opacity-50);
+}
+.review:first-child {
+  padding-top: 0;
+}
+.review:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.review__rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  line-height: 1;
+}
+.review__text {
+  font-size: 1.3rem;
+}
+.review__date {
+  color: rgb(128, 128, 128);
+  font-size: 14px;
+  margin-top: 8px;
+}
+.review__name {
+  font-size: 16px;
+  line-height: 1.2;
+  font-weight: 500;
+}

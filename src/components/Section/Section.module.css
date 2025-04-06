@@ -1,0 +1,8 @@
+.section {
+  margin: 2rem 0;
+}
+
+.section__title {
+  font-size: 28px;
+  margin-bottom: 1rem;
+}
