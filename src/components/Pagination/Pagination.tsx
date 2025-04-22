@@ -49,7 +49,13 @@ const Pagination = ({ paginationLength, currentPage, setCurrentPage, setSearchPa
           if (currentPage === paginationLength - 1) {
             start = currentPage - 3;
           }
-          const activeButtonClass = start + i === currentPage ? styles.pagination__button_current : '';
+          if (paginationLength < 4) {
+            start = 0
+          }
+            const activeButtonClass =
+              start + i === currentPage
+                ? styles.pagination__button_current
+                : '';
           return (
             <button
               key={start + i}

@@ -4,6 +4,7 @@ import { Category } from '../../types/types';
 import { CategoryIconsMap } from '../../data/categoryIcons';
 import CategoryItem from '../CategoryItem/CategoryItem';
 import styles from './Categories.module.css'
+import { Link } from 'react-router-dom';
 
 const Categories = () => {
   const [categories, setCategories] = useState<Category[]>([]);
@@ -18,11 +19,13 @@ const Categories = () => {
   }, [])
 
   return (
-    <div className='container'>
+    <div className='container' style={{marginBottom: '50px'}}>
       <h2>Categories</h2>
       <div className={styles.categoriesList}>
         {categories.map((el) => (
-          <CategoryItem key={el.slug} img={CategoryIconsMap[el.slug]} text={el.name}/>
+          <Link to={`/catalog?category=${el.slug}`} style={{color: 'black', textDecoration: 'none'}}>
+            <CategoryItem key={el.slug} img={CategoryIconsMap[el.slug]} text={el.name}/>
+          </Link>
         ))}
       </div>
     </div>

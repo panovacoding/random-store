@@ -9,7 +9,7 @@
   margin: 16px 0;
 }
 
-.headerLink {
+.header__link {
   display: block;
   color: #ffffff;
 
@@ -23,7 +23,7 @@
   overflow: hidden;
 }
 
-.headerLink:after {
+.header__link:after {
   content: '';
   position: absolute;
   bottom: 0;
@@ -36,7 +36,7 @@
   transition: translate 0.3s;
 }
 
-.headerLink:hover:after {
+.header__link:hover:after {
   translate: 0 0;
   
 }

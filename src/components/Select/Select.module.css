@@ -1,0 +1,48 @@
+.select {
+  position: relative;
+}
+
+.select__label {
+  background-color: rgb(240, 240, 240);
+  padding: 12px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+}
+
+.select__name {
+  font-size: .9rem;
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+
+.select__optionList {
+  background-color: rgb(240, 240, 240);
+  border-radius: 8px;
+
+  position: absolute;
+  z-index: 2;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  translate: 0 100%;
+
+  list-style: none;
+
+  height: 12rem;
+  overflow-y: scroll;
+}
+
+.select__option {
+  padding: 8px 12px;
+  cursor: pointer;
+  color: inherit;
+  transition: color 0.15s;
+}
+.select__option:hover, .select__option.active {
+  color: var(--color-primary);
+}

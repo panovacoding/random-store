@@ -1,25 +1,22 @@
-import { useState, useEffect } from 'react';
 import Categories from '../../components/Categories/Categories';
-import Header from '../../components/Header/Header';
-import ProductList from '../../components/ProductList/ProductList';
-import { Product } from '../../types/types';
-import getProducts from '../../data/getProducts';
+import Header from '../../widgets/Header/Header';
+import ProductList from '../../features/products/ProductList/ProductList';
+import { useProducts } from '../../shared/hooks/useProducts';
+import Loader from '../../components/Loader/Loader';
 
 const MainPage = () => {  
-  const [products, setProducts] = useState<Product[] | []>([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const data = await getProducts(0, 4);
-      setProducts(data.products);
-    };
-    fetchProducts();
-  }, []);
+   const { isLoading, products } = useProducts({currentPage: 0, productsPerPage: 4});
 
   return (
     <>
       <Header />
-      <ProductList products={products} sectionTitle='Popular'/>
+      {
+        isLoading ? (
+          <Loader />
+        ) : (
+          <ProductList products={products || []} sectionTitle='Popular' isWithFilters={false} categorySelectedValue=''/>
+        )
+      }
       <Categories />
     </>
   );

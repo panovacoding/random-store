@@ -5,7 +5,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 import { useParams } from 'react-router-dom'
-import Header from '../../components/Header/Header'
+import Header from '../../widgets/Header/Header'
 import getSingleProduct from '../../data/getSingleProduct';
 import { useEffect, useState } from 'react';
 import { Product } from '../../types/types';

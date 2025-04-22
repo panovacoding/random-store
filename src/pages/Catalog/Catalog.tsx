@@ -1,64 +1,84 @@
 import { useSearchParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import Header from '../../components/Header/Header';
-import ProductList from '../../components/ProductList/ProductList';
-import getProducts from '../../data/getProducts';
-import { Product } from '../../types/types';
-
+import { useState } from 'react';
+import Header from '../../widgets/Header/Header';
+import ProductList from '../../features/products/ProductList/ProductList';
 import Pagination from '../../components/Pagination/Pagination';
-import Loader from '../../components/Loader/Loader';
+import { useProducts } from '../../shared/hooks/useProducts';
 
 const Catalog = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const pageFromUrl = Number(searchParams.get('page')) || 1; // Берем номер страницы из URL
+  const pageFromUrl = Number(searchParams.get('page')) || 1; 
+  const categoryFromUrl = searchParams.get('category') || '';
+  const sortFromUrl = searchParams.get('sort') || 'default';
 
-  const [isLoading, setIsLoading] = useState(true)
-  const [products, setProducts] = useState<Product[] | []>([]);
-  const [total, setTotal] = useState<number>(0);
+  
+  const [selectedCategory, setSelectedCategory] = useState<string>(categoryFromUrl);
   const [currentPage, setCurrentPage] = useState<number>(pageFromUrl - 1);
-
   const PRODUCTS_PER_PAGE = 20;
 
   const handleSearchParams = (page: string) => {
-    setSearchParams({ page })
+    setSearchParams((prevParams) => {
+      const updatedParams = new URLSearchParams(prevParams);
+      updatedParams.set('page', page);
+      return updatedParams;
+    });
   }
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      setIsLoading(true);
-      const data = await getProducts(
-        currentPage * PRODUCTS_PER_PAGE,
-        PRODUCTS_PER_PAGE
-      );
-      setProducts(data.products);
-      setTotal(data.total);
+  const handleCategoryChange = (categoryParam: string) => {
+    setSearchParams((prevParams) => {
+      const updatedParams = new URLSearchParams(prevParams);
+      updatedParams.set('category', categoryParam);
+      updatedParams.set('page', '1');
+      setSelectedCategory(categoryParam);
+      return updatedParams
+    });
+    setCurrentPage(0)
+  }
 
-      // Загрузка всех изображений товаров
-      const imagePromises = data.products.map((product) => {
-        return new Promise((resolve) => {
-          const img = new Image();
-          img.src = product.thumbnail;
-          img.onload = resolve; // Когда изображение загружено, разрешаем промис
-        });
-      });
+  const sortMap: Record<string, { sortBy: string; order: 'asc' | 'desc' }> = {
+    default: { sortBy: 'title', order: 'asc' },
+    'price-asc': { sortBy: 'price', order: 'asc' },
+    'price-desc': { sortBy: 'price', order: 'desc' },
+    'rating-asc': { sortBy: 'rating', order: 'asc' },
+    'rating-desc': { sortBy: 'rating', order: 'desc' },
+  };
 
-      // Когда данные и все изображения загружены
-      Promise.all(imagePromises).then(() => {
-        setIsLoading(false); // Останавливаем лоадер
-      });
-    };
-    fetchProducts();
-  }, [currentPage, searchParams]);
+  const { sortBy, order } = sortMap[sortFromUrl] || sortMap['default'];
+
+  const handleSortChange = (sortParam: string) => {
+    setSearchParams((prevParams) => {
+      const updatedParams = new URLSearchParams(prevParams);
+      updatedParams.set('sort', sortParam);
+      updatedParams.set('page', '1');
+      return updatedParams;
+    });
+    setCurrentPage(0);
+  };
+
+
+  const { isLoading, products, total } = useProducts({
+    currentPage,
+    productsPerPage: PRODUCTS_PER_PAGE,
+    category: categoryFromUrl,
+    sortBy,
+    order,
+  });
+
+
+
   return (
     <>
       <Header />
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <ProductList products={products} sectionTitle='Catalog' />
-        </>
-      )}
+      <ProductList
+        products={products}
+        isLoading={isLoading}
+        sectionTitle='Catalog'
+        isWithFilters={true}
+        onCategoryChange={handleCategoryChange}
+        categorySelectedValue={selectedCategory || 'all'}
+        onSortChange={handleSortChange}
+        sortSelectedValue={sortFromUrl || 'default'}
+      />
       <Pagination
         paginationLength={Math.ceil(total / PRODUCTS_PER_PAGE)}
         currentPage={currentPage}

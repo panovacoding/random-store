@@ -1,4 +1,4 @@
-import FavoriteButton from '../FavoriteButton/FavoriteButton';
+import FavoriteButton from '../../features/favorites/FavoriteButton/FavoriteButton';
 import styles from './ProductCard.module.css';
 import { Product } from '../../types/types';
 import { Link } from 'react-router-dom';
@@ -25,7 +25,7 @@ const ProductCard = ({product} : ProductCardProps) => {
         <div className={styles.productCardPrice}>${price}</div>
       </div>
       <div className={styles.productCardDescription}>{brand}</div>
-      <FavoriteButton className={styles.productCardFavBtn} />
+      <FavoriteButton className={styles.productCardFavBtn} productId={product.id}/>
     </div>
   );
 }

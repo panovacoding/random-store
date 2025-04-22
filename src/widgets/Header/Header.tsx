@@ -5,13 +5,13 @@ const Header = () => {
   return (
     <div className='container'>
       <div className={styles.header}>
-        <Link to='/' className={styles.headerLink}>
+        <Link to='/' className={styles.header__link}>
           Main
         </Link>
-        <Link to='/catalog' className={styles.headerLink}>
+        <Link to='/catalog' className={styles.header__link}>
           Catalog
         </Link>
-        <Link to='/favorites' className={styles.headerLink}>
+        <Link to='/favorites' className={styles.header__link}>
           Favorites
         </Link>
       </div>

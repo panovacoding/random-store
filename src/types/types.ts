@@ -30,3 +30,9 @@ export type Category = {
   name: string;
   slug: string;
 };
+
+
+export type SelectOption = {
+  value: string;
+  label: string;
+};
